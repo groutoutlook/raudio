@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.11)
 project(raudio
     DESCRIPTION "raudio: A simple and easy-to-use audio library based on miniaudio"
@@ -41,10 +42,15 @@ target_compile_definitions(raudio PUBLIC
 )
 
 # Dependenices
+if(MSVC)
+target_link_libraries(raudio
+#    m # math
+)
+else()
 target_link_libraries(raudio
     m # math
 )
-
+endif()
 # Audio file support options
 if (SUPPORT_FILEFORMAT_WAV)
     target_compile_definitions(raudio PUBLIC SUPPORT_FILEFORMAT_WAV)
